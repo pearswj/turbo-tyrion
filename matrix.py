@@ -1,3 +1,9 @@
+'''
+A short and sweet matrix library.
+Written for IronPython and Rhino.
+By Will Pearson (pearswj).
+'''
+
 import math
 #import random # NOTE: random module doesn't work in Rhino...
 import xalglib
