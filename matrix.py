@@ -1,6 +1,7 @@
 '''
 A short and sweet matrix library.
 Written for IronPython and Rhino.
+Requires ALGLIB for eig() function (see below).
 By Will Pearson (pearswj).
 '''
 
