@@ -247,6 +247,9 @@ if __name__ == '__main__':
             A = Matrix([[39, 54, 69], [54, 75, 96], [64, 89, 114]])
             B = Matrix.identity(3)
             self.assertTrue(A*B == A)
+            
+        def failingTest(self):
+            self.fail("shouldn't happen")
 
     import xmlrunner
     unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'))
