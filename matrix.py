@@ -247,8 +247,5 @@ class MatrixTests(unittest.TestCase):
         B = Matrix.identity(3)
         self.assertTrue(A*B == A)
 
-    def testFail(self):
-        self.fail("shouldn't happen")
-
 if __name__ == '__main__':
     unittest.main()
