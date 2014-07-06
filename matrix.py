@@ -248,4 +248,5 @@ if __name__ == '__main__':
             B = Matrix.identity(3)
             self.assertTrue(A*B == A)
 
-    unittest.main()
+    import xmlrunner
+    unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'))
