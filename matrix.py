@@ -7,7 +7,11 @@ By Will Pearson (pearswj).
 
 import math
 #import random # NOTE: random module doesn't work in Rhino...
-import xalglib
+alglib_exists = True
+try:
+    import xalglib
+except:
+    alglib_exists = False
 
 __version__ = "0.1"
 
@@ -143,8 +147,11 @@ class Matrix(object):
     def eig(self):
         """Returns eigenvalues (as list) and eigenvectors (as matrix).
         Uses ALGLIB (see http://www.alglib.net/translator/man/manual.ipython.html#sub_rmatrixevd)."""
-        result, evals, wi, wl, evecs = xalglib.rmatrixevd(self.asList(), self.shape[0], 1)
-        return (evals, Matrix(evecs))
+        if alglib_exists:
+            result, evals, wi, wl, evecs = xalglib.rmatrixevd(self.asList(), self.shape[0], 1)
+            return (evals, Matrix(evecs))
+        else:
+            raise Exception("ALGLIB not available.")
         
     # Operators...
     
