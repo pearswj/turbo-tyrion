@@ -200,56 +200,55 @@ class Matrix(object):
         self._array = temp.asList()
         return self
         
-if __name__ == '__main__':
-    import unittest
+import unittest
+
+class MatrixTests(unittest.TestCase):
+
+    def testAdd(self):
+        A = Matrix([[1, 2, 3], [4, 5, 6]])
+        B = Matrix([[7, 8, 9], [10, 11, 12]])
+        c = 5
+        self.assertTrue(A+B == Matrix([[8, 10, 12], [14,16,18]]))
+        self.assertTrue(c+A == A+c)
+        A += B
+        self.assertTrue(A == Matrix([[8, 10, 12], [14,16,18]]))
     
-    class MatrixTests(unittest.TestCase):
+    def testSub(self):
+        A = Matrix([[1, 2, 3], [4, 5, 6]])
+        B = Matrix([[7, 8, 9], [10, 11, 12]])        
+        c = 5
+        self.assertTrue(B-A == Matrix([[6, 6, 6], [6, 6, 6]]))
+        self.assertTrue(c-A == A-c)
+        B -= A
+        self.assertTrue(B == Matrix([[6, 6, 6], [6, 6, 6]]))
 
-        def testAdd(self):
-            A = Matrix([[1, 2, 3], [4, 5, 6]])
-            B = Matrix([[7, 8, 9], [10, 11, 12]])
-            c = 5
-            self.assertTrue(A+B == Matrix([[8, 10, 12], [14,16,18]]))
-            self.assertTrue(c+A == A+c)
-            A += B
-            self.assertTrue(A == Matrix([[8, 10, 12], [14,16,18]]))
-        
-        def testSub(self):
-            A = Matrix([[1, 2, 3], [4, 5, 6]])
-            B = Matrix([[7, 8, 9], [10, 11, 12]])        
-            c = 5
-            self.assertTrue(B-A == Matrix([[6, 6, 6], [6, 6, 6]]))
-            self.assertTrue(c-A == A-c)
-            B -= A
-            self.assertTrue(B == Matrix([[6, 6, 6], [6, 6, 6]]))
+    def testMul(self):
+        A = Matrix([[1, 2, 3], [4, 5, 6]])
+        B = Matrix([[7, 8], [10, 11], [12, 13]])
+        c = 5
+        self.assertTrue(A*B == Matrix([[63, 69], [150, 165]]))
+        self.assertTrue(B*A == Matrix([[39, 54, 69], [54, 75, 96], [64, 89, 114]]))
+        self.assertTrue(c*A == A*c)
+        A *= 2
+        self.assertTrue(A == Matrix([[2, 4, 6], [8, 10, 12]]))
 
-        def testMul(self):
-            A = Matrix([[1, 2, 3], [4, 5, 6]])
-            B = Matrix([[7, 8], [10, 11], [12, 13]])
-            c = 5
-            self.assertTrue(A*B == Matrix([[63, 69], [150, 165]]))
-            self.assertTrue(B*A == Matrix([[39, 54, 69], [54, 75, 96], [64, 89, 114]]))
-            self.assertTrue(c*A == A*c)
-            A *= 2
-            self.assertTrue(A == Matrix([[2, 4, 6], [8, 10, 12]]))
+    def testTranspose(self):
+        A = Matrix([[39, 54, 69], [54, 75, 96], [64, 89, 114]])
+        B = Matrix(A.asList())
+        A.transpose()
+        self.assertTrue(A != B)
+        A.transpose()
+        self.assertTrue(A == B)
+        A = Matrix([[1, 1, 1]])
+        self.assertTrue(A * A.transpose() == Matrix([[3]]))
 
-        def testTranspose(self):
-            A = Matrix([[39, 54, 69], [54, 75, 96], [64, 89, 114]])
-            B = Matrix(A.asList())
-            A.transpose()
-            self.assertTrue(A != B)
-            A.transpose()
-            self.assertTrue(A == B)
-            A = Matrix([[1, 1, 1]])
-            self.assertTrue(A * A.transpose() == Matrix([[3]]))
+    def testId(self):
+        A = Matrix([[39, 54, 69], [54, 75, 96], [64, 89, 114]])
+        B = Matrix.identity(3)
+        self.assertTrue(A*B == A)
 
-        def testId(self):
-            A = Matrix([[39, 54, 69], [54, 75, 96], [64, 89, 114]])
-            B = Matrix.identity(3)
-            self.assertTrue(A*B == A)
-            
-        def failingTest(self):
-            self.fail("shouldn't happen")
+    def testFail(self):
+        self.fail("shouldn't happen")
 
-    import xmlrunner
-    unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'))
+if __name__ == '__main__':
+    unittest.main()
