@@ -1,3 +1,5 @@
+S3BL_IGNORE_PATH = true;
+
 if (typeof S3BL_IGNORE_PATH == 'undefined' || S3BL_IGNORE_PATH!=true) {
   var S3BL_IGNORE_PATH = false;
 }
