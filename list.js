@@ -105,6 +105,19 @@ function renderTable(info) {
   content.push(padRight('Last Modified', cols[1]) + '  ' + padRight('Size', cols[2]) + 'Key \n');
   content.push(new Array(cols[0] + cols[1] + cols[2] + 4).join('-') + '\n');
   
+  // sort files in reverse chronological order
+  files.sort(function(a,b){
+    var aDate = new Date(a.LastModified);
+    var bDate = new Date(b.LastModified);
+    if(aDate < bDate){
+        return -1;
+    } else if(aDate == bDate){
+        return 0;
+    } else { // a > b
+        return 1;
+    }
+    }).reverse();
+  
   // add the ../ at the start of the directory listing
   if (prefix) {
     var up = prefix.replace(/\/$/, '').split('/').slice(0, -1).concat('').join('/'), // one directory up
