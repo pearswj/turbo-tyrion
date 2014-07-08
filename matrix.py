@@ -247,6 +247,7 @@ class MatrixTests(unittest.TestCase):
         B = Matrix.identity(3)
         self.assertTrue(A*B == A)
     
+    @unittest.skip("demonstrating skipping")
     def testFail(self):
         self.fail("shouldn't happen")
 
