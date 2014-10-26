@@ -1,2 +1,4 @@
 #!/bin/sh
 py.test --junit-xml test-results.xml matrix.py
+mkdir -p dist
+cp matrix.py dist/
